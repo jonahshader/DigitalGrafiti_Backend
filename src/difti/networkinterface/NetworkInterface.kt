@@ -1,10 +1,11 @@
-package networkinterface
+package difti.networkinterface
 
 import processing.data.JSONArray
 import java.util.*
 import java.net.ServerSocket
 import java.net.Socket
 import java.concurrent.thread
+import kotlin.concurrent.thread
 
 //TODO:
 fun main() {

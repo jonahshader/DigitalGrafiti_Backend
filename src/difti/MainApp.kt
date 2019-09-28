@@ -1,8 +1,10 @@
 package difti
 
+import difti.display.Display
 import processing.core.PApplet
 
 class MainApp : PApplet() {
+//    val display = Display(this)
 
     override fun settings() {
         fullScreen()

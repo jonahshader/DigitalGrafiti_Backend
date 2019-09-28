@@ -1,11 +1,20 @@
 package difti
 
-import processing.core.PImage
+import processing.core.PApplet
+import processing.core.PConstants.CENTER
+import processing.core.PGraphics
 
-class GImage(val pixelArrayImage: PixelArrayImage, val xCenter: Float, val yCenter: Float, val rotationRadians: Float) {
-    lateinit var image: PImage
+class GImage(mainApp: PApplet, pixelArrayImage: PixelArrayImage, private val xCenter: Float, private val yCenter: Float, private val rotationRadians: Float) {
+    private var image = pixelArrayImage.toPGraphics(mainApp)
 
-    init {
-
+    fun renderToBuffer(buffer: PGraphics) {
+        buffer.beginDraw()
+        buffer.imageMode(CENTER)
+        buffer.pushMatrix()
+        buffer.translate(xCenter, yCenter)
+        buffer.rotate(rotationRadians)
+        buffer.image(image, 0f, 0f)
+        buffer.popMatrix()
+        buffer.endDraw()
     }
 }
