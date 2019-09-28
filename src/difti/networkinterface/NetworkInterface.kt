@@ -1,26 +1,27 @@
 package difti.networkinterface
 
+import difti.display.Display
 import processing.data.JSONArray
 import java.util.*
 import java.net.ServerSocket
 import java.net.Socket
 import kotlin.concurrent.thread
 
-//TODO:
-fun main() {
+//TODO: get out of main function
+fun socketserver() {
     val server = ServerSocket(1337)
     while (true) {
         val client = server.accept()
         thread {
-            ClientHandler(client).process()
+            ClientHandler(client).run()
         }
     }
 }
 
-class ClientHander(client: Socket) {
+class ClientHandler(client: Socket, disp: Display) {
     private val client: Socket = client
-    private val active: Boolean = false
-    fun process() {
+    private var active: Boolean = false
+    fun run() {
         active = true
         while (active) {
 
