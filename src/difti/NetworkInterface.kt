@@ -1,12 +1,38 @@
-package difti
+package networkinterface
 
+import processing.data.JSONArray
 import java.util.*
 import java.net.ServerSocket
 import java.net.Socket
+import java.concurrent.thread
 
-
-class socketHandler() {
-    private val client: Socket = client
+//TODO:
+fun main() {
+    val server = ServerSocket(1337)
+    while (true) {
+        val client = server.accept()
+        thread {
+            ClientHandler(client).process()
+        }
+    }
+}
+class socketServer() {
+    private val
+    init() {
 
     }
+}
+class ClientHander(client: Socket) {
+    private val client: Socket = client
+    private val active: Boolean = false
+    fun process() {
+        active = true
+        while (active) {
+
+        }
+    }
+}
+
+fun pixArrayImage(obj: JSONArray) {
+
 }
