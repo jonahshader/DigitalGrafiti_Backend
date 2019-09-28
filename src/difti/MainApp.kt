@@ -4,7 +4,7 @@ import difti.display.Display
 import processing.core.PApplet
 
 class MainApp : PApplet() {
-//    val display = Display(this)
+    lateinit val display: Display
 
     override fun settings() {
         fullScreen()
