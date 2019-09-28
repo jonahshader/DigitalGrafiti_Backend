@@ -16,12 +16,7 @@ fun main() {
         }
     }
 }
-class socketServer() {
-    private val
-    init() {
 
-    }
-}
 class ClientHander(client: Socket) {
     private val client: Socket = client
     private val active: Boolean = false
