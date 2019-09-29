@@ -57,13 +57,20 @@ private fun mkImgFromPixArray(obj: JSONObject, app: PApplet) : GImage {
         img.add(ArrayList())
         for (x in 0 until w) {
             val index = ((y * w) + x) * 4
-            img[y].add(
-                Pixel(
-                    Integer.parseInt(pixArray[index].toString()),
-                    Integer.parseInt(pixArray[index + 1].toString()),
-                    Integer.parseInt(pixArray[index + 2].toString()),
-                    Integer.parseInt(pixArray[index + 3].toString())
-                ))
+            var r = Integer.parseInt(pixArray[index].toString())
+            var g = Integer.parseInt(pixArray[index + 1].toString())
+            var b = Integer.parseInt(pixArray[index + 2].toString())
+            var a = Integer.parseInt(pixArray[index + 3].toString())
+
+            if (r + g + b + a == 0) {
+                r = 255
+                g = 255
+                b = 255
+                a = 20
+            }
+
+            img[y].add(Pixel(r, g, b, a))
+
         }
     }
     val i = difti.PixelArrayImage(img)
