@@ -36,9 +36,10 @@ private class ClientHandler(val client: Socket) {
             l += br.readLine()
         }
 
-        val mkPixArrayImage()
+        Display.addImage(mkImgFromPixArray(l))
     }
 }
+
 private fun mkImgFromPixArray(obj: JSONObject) : difti.GImage {
     val h = obj.getJSONObject('height')
     val w = obj.getJSONObject('width')
