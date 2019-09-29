@@ -18,17 +18,6 @@ class MainApp : PApplet() {
         backgroundImage = loadImage("digitalgraffiti.png")
         display = Display(this, width, height)
         server = SocketServer(display, this)
-        val tempPixelArray = ArrayList<ArrayList<Pixel>>()
-        for (y in 0 until 480) {
-            tempPixelArray.add(ArrayList())
-            for (x in 0 until 640) {
-                tempPixelArray[y].add(Pixel((Math.random() * 255).toInt(), (Math.random() * 255).toInt(), (Math.random() * 255).toInt(), (Math.random() * 255).toInt()))
-            }
-        }
-        val tempImage = GImage(this, PixelArrayImage(tempPixelArray), width/2f, height/2f, 1f)
-        val tempImage2 = GImage(this, PixelArrayImage(tempPixelArray), width/2f, height/2f, 0f)
-        //display.addImage(tempImage)
-        //display.addImage(tempImage2)
     }
 
     override fun draw() {

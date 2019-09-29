@@ -7,12 +7,10 @@ import processing.core.PApplet
 import processing.data.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.lang.Math.floor
 import java.util.*
 import java.net.ServerSocket
 import java.net.Socket
 import kotlin.concurrent.thread
-import kotlin.math.floor
 
 class SocketServer(val disp: Display, val app: PApplet) {
     private val server = ServerSocket(1337)
@@ -61,16 +59,7 @@ private fun mkImgFromPixArray(obj: JSONObject, app: PApplet) : GImage {
             var g = Integer.parseInt(pixArray[index + 1].toString())
             var b = Integer.parseInt(pixArray[index + 2].toString())
             var a = Integer.parseInt(pixArray[index + 3].toString())
-
-//            if (r + g + b + a == 0) {
-//                r = 255
-//                g = 255
-//                b = 255
-//                a = 20
-//            }
-
             img[y].add(Pixel(r, g, b, a))
-
         }
     }
     val i = difti.PixelArrayImage(img)
