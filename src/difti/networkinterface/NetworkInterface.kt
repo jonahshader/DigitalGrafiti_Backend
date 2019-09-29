@@ -50,7 +50,6 @@ private fun mkImgFromPixArray(obj: JSONObject, app: PApplet) : GImage {
     val rotation = obj.getFloat("rotation")
     val pixArray = obj.getJSONArray("rgba")
     var img = ArrayList<ArrayList<Pixel>>()
-    var tAr = ArrayList<Pixel>()
 
     for (y in 0 until h) {
         img.add(ArrayList())
@@ -65,18 +64,6 @@ private fun mkImgFromPixArray(obj: JSONObject, app: PApplet) : GImage {
                 ))
         }
     }
-
-//    for (i in 0 until pixArray.size()) {
-//        if ((i%((pixArray.size()/4)/w)).equals(0)) {
-//            println(img)
-//            img.add(tAr)
-//            tAr = ArrayList<Pixel>()
-//        }
-//        if (i%4 == 0) {
-//           val pix = Pixel(Integer.parseInt(pixArray[i].toString()), Integer.parseInt(pixArray[i+1].toString()), Integer.parseInt(pixArray[i+2].toString()), Integer.parseInt(pixArray[i+3].toString()))
-//           tAr.add(pix)
-//        }
-//    }
     val i = difti.PixelArrayImage(img)
     return GImage(app, i, x_center, y_center, rotation)
 }
