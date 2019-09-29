@@ -40,11 +40,13 @@ private class ClientHandler(val client: Socket, val app: PApplet, val disp: Disp
     }
 }
 
-private fun mkImgFromPixArray(obj: JSONObject, app: PApplet) : difti.GImage {
+private fun mkImgFromPixArray(obj: JSONObject, app: PApplet) : GImage {
     val h = obj.getInt("height")
     val w = obj.getInt("width")
-    val x_center = obj.getFloat("x")
-    val y_center = obj.getFloat("y")
+//    val x_center = obj.getFloat("x")
+//    val y_center = obj.getFloat("y")
+    val x_center = (((app.width - (w * 2)) * Math.random()) + w).toFloat()
+    val y_center = (((app.height - (h * 2)) * Math.random()) + h).toFloat()
     val rotation = obj.getFloat("rotation")
     val pixArray = obj.getJSONArray("rgba")
     var img = ArrayList<ArrayList<Pixel>>()
