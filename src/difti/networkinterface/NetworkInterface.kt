@@ -7,10 +7,12 @@ import processing.core.PApplet
 import processing.data.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import java.lang.Math.floor
 import java.util.*
 import java.net.ServerSocket
 import java.net.Socket
 import kotlin.concurrent.thread
+import kotlin.math.floor
 
 class SocketServer(val disp: Display, val app: PApplet) {
     private val server = ServerSocket(1337)
@@ -33,30 +35,29 @@ private class ClientHandler(val client: Socket, val app: PApplet, val disp: Disp
         active = true
         val inp = client.getInputStream()
         val br = BufferedReader(InputStreamReader(inp))
-        var l = String()
-        while (l != null) {
-            l += br.readLine()
-        }
+        val l = JSONObject.parse(br.readLine())
         disp.addImage(mkImgFromPixArray(l, app))
     }
 }
 
 private fun mkImgFromPixArray(obj: JSONObject, app: PApplet) : difti.GImage {
-    val h = obj.getFloat("height")
-    val w = obj.getFloat("width")
+
+    val h = floor(obj.getFloat("height"))
+    val w = floor(obj.getFloat("width"))
     val x_center = obj.getFloat("x")
     val y_center = obj.getFloat("y")
     val rotation = obj.getFloat("rotation")
     val pixArray = obj.getJSONArray("rgba")
     var img = ArrayList<ArrayList<Pixel>>()
     var tAr = ArrayList<Pixel>()
-    for (i in 0..pixArray.size()-1) {
-        if ((i%(pixArray.size()/w)).equals(0)) {
+    for (i in 0 until pixArray.size()) {
+        if ((i%((pixArray.size()/4)/w)).equals(0)) {
+            println(img)
             img.add(tAr)
             tAr = ArrayList<Pixel>()
         }
         if (i%4 == 0) {
-           val pix = Pixel(Integer.parseInt(pixArray[i].toString()), Integer.parseInt(pixArray[i+1].toString()), Integer.parseInt(pixArray[i+2].toString()), Integer.parseInt(pixArray[i+3].toString()))
+z           val pix = Pixel(Integer.parseInt(pixArray[i].toString()), Integer.parseInt(pixArray[i+1].toString()), Integer.parseInt(pixArray[i+2].toString()), Integer.parseInt(pixArray[i+3].toString()))
            tAr.add(pix)
         }
     }

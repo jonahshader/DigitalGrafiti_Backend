@@ -9,5 +9,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
     <orderEntry type="library" name="org.processing:core:3.3.6" level="project" />
+    <orderEntry type="library" name="org.json:json:20190722" level="project" />
+    <orderEntry type="library" name="org.apache.clerezza.ext:org.json.simple:0.4" level="project" />
   </component>
 </module>

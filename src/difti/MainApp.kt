@@ -23,8 +23,8 @@ class MainApp : PApplet() {
         }
         val tempImage = GImage(this, PixelArrayImage(tempPixelArray), width/2f, height/2f, 1f)
         val tempImage2 = GImage(this, PixelArrayImage(tempPixelArray), width/2f, height/2f, 0f)
-        display.addImage(tempImage)
-        display.addImage(tempImage2)
+        //display.addImage(tempImage)
+        //display.addImage(tempImage2)
     }
 
     override fun draw() {
