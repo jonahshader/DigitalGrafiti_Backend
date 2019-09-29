@@ -62,12 +62,12 @@ private fun mkImgFromPixArray(obj: JSONObject, app: PApplet) : GImage {
             var b = Integer.parseInt(pixArray[index + 2].toString())
             var a = Integer.parseInt(pixArray[index + 3].toString())
 
-            if (r + g + b + a == 0) {
-                r = 255
-                g = 255
-                b = 255
-                a = 20
-            }
+//            if (r + g + b + a == 0) {
+//                r = 255
+//                g = 255
+//                b = 255
+//                a = 20
+//            }
 
             img[y].add(Pixel(r, g, b, a))
 
