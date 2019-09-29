@@ -13,7 +13,7 @@ class MainApp : PApplet() {
 
     override fun setup() {
         display = Display(this, width, height)
-        server = SocketServer(display)
+        server = SocketServer(display, this)
         val tempPixelArray = ArrayList<ArrayList<Pixel>>()
         for (y in 0 until 480) {
             tempPixelArray.add(ArrayList())

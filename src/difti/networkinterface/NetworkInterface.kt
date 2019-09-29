@@ -3,6 +3,7 @@ package difti.networkinterface
 import difti.GImage
 import difti.Pixel
 import difti.display.Display
+import processing.core.PApplet
 import processing.data.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -11,7 +12,7 @@ import java.net.ServerSocket
 import java.net.Socket
 import kotlin.concurrent.thread
 
-class SocketServer(val disp: Display) {
+class SocketServer(val disp: Display, val app: PApplet) {
     private val server = ServerSocket(1337)
 
     init {
@@ -40,11 +41,12 @@ private class ClientHandler(val client: Socket, val disp: Display) {
     }
 }
 
-private fun mkImgFromPixArray(obj: JSONObject) : difti.GImage {
+private fun mkImgFromPixArray(obj: JSONObject, app: PApplet) : difti.GImage {
     val h = obj.getJSONObject("height")
     val w = obj.getJSONObject("width")
     val x_center = obj.getJSONObject("x")
     val y_center = obj.getJSONObject("y")
+    val rotation = obj.getJSONObject("rotation")
     val pixArray = obj.getJSONArray("rgba")
     var img = ArrayList<ArrayList<Pixel>>()
     var tAr = ArrayList<Pixel>()
@@ -59,5 +61,5 @@ private fun mkImgFromPixArray(obj: JSONObject) : difti.GImage {
         }
     }
     val i = difti.PixelArrayImage(img)
-    return GImage()
+    return GImage(app, i, Integer.parseInt(x_center.toString()), Integer.parseInt(y_center.toString(), String.toFloat(rotation.toString())))
 }
