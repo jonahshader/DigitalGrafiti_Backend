@@ -41,26 +41,40 @@ private class ClientHandler(val client: Socket, val app: PApplet, val disp: Disp
 }
 
 private fun mkImgFromPixArray(obj: JSONObject, app: PApplet) : difti.GImage {
-
-    val h = floor(obj.getFloat("height"))
-    val w = floor(obj.getFloat("width"))
+    val h = obj.getInt("height")
+    val w = obj.getInt("width")
     val x_center = obj.getFloat("x")
     val y_center = obj.getFloat("y")
     val rotation = obj.getFloat("rotation")
     val pixArray = obj.getJSONArray("rgba")
     var img = ArrayList<ArrayList<Pixel>>()
     var tAr = ArrayList<Pixel>()
-    for (i in 0 until pixArray.size()) {
-        if ((i%((pixArray.size()/4)/w)).equals(0)) {
-            println(img)
-            img.add(tAr)
-            tAr = ArrayList<Pixel>()
-        }
-        if (i%4 == 0) {
-z           val pix = Pixel(Integer.parseInt(pixArray[i].toString()), Integer.parseInt(pixArray[i+1].toString()), Integer.parseInt(pixArray[i+2].toString()), Integer.parseInt(pixArray[i+3].toString()))
-           tAr.add(pix)
+
+    for (y in 0 until h) {
+        img.add(ArrayList())
+        for (x in 0 until w) {
+            val index = ((y * w) + x) * 4
+            img[y].add(
+                Pixel(
+                    Integer.parseInt(pixArray[index].toString()),
+                    Integer.parseInt(pixArray[index + 1].toString()),
+                    Integer.parseInt(pixArray[index + 2].toString()),
+                    Integer.parseInt(pixArray[index + 3].toString())
+                ))
         }
     }
+
+//    for (i in 0 until pixArray.size()) {
+//        if ((i%((pixArray.size()/4)/w)).equals(0)) {
+//            println(img)
+//            img.add(tAr)
+//            tAr = ArrayList<Pixel>()
+//        }
+//        if (i%4 == 0) {
+//           val pix = Pixel(Integer.parseInt(pixArray[i].toString()), Integer.parseInt(pixArray[i+1].toString()), Integer.parseInt(pixArray[i+2].toString()), Integer.parseInt(pixArray[i+3].toString()))
+//           tAr.add(pix)
+//        }
+//    }
     val i = difti.PixelArrayImage(img)
     return GImage(app, i, x_center, y_center, rotation)
 }
