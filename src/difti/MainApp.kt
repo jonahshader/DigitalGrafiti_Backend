@@ -1,17 +1,19 @@
 package difti
 
 import difti.display.Display
+import difti.networkinterface.SocketServer
 import processing.core.PApplet
 
 class MainApp : PApplet() {
     lateinit var display: Display
-
+    lateinit var server: SocketServer
     override fun settings() {
         fullScreen()
     }
 
     override fun setup() {
         display = Display(this, width, height)
+        server = SocketServer(display)
         val tempPixelArray = ArrayList<ArrayList<Pixel>>()
         for (y in 0 until 480) {
             tempPixelArray.add(ArrayList())
