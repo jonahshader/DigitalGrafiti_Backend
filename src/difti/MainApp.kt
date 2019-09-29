@@ -32,7 +32,7 @@ class MainApp : PApplet() {
     }
 
     override fun draw() {
-        background(backgroundImage)
+        image(backgroundImage, 0f, 0f, width.toFloat(), height.toFloat())
         display.drawToScreen(this)
     }
 }
