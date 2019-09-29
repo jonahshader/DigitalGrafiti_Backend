@@ -3,15 +3,19 @@ package difti
 import difti.display.Display
 import difti.networkinterface.SocketServer
 import processing.core.PApplet
+import processing.core.PImage
 
 class MainApp : PApplet() {
     lateinit var display: Display
     lateinit var server: SocketServer
+    lateinit var backgroundImage: PImage
+
     override fun settings() {
         fullScreen()
     }
 
     override fun setup() {
+        backgroundImage = loadImage("digitalgraffiti.png")
         display = Display(this, width, height)
         server = SocketServer(display, this)
         val tempPixelArray = ArrayList<ArrayList<Pixel>>()
@@ -28,7 +32,7 @@ class MainApp : PApplet() {
     }
 
     override fun draw() {
-        background(255)
+        background(backgroundImage)
         display.drawToScreen(this)
     }
 }
